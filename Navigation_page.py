@@ -15,14 +15,15 @@ import html
 
 
 def ChromeDriver():
-    File_Location = open("D:\\0 PYTHON EXE SQL CONNECTION & DRIVER PATH\\mot.gov.iq\\Location For Database & Driver.txt", "r")
-    TXT_File_AllText = File_Location.read()
-    Chromedriver = str(TXT_File_AllText).partition("Driver=")[2].partition("\")")[0].strip()
+    # File_Location = open("D:\\0 PYTHON EXE SQL CONNECTION & DRIVER PATH\\mot.gov.iq\\Location For Database & Driver.txt", "r")
+    # TXT_File_AllText = File_Location.read()
+    # Chromedriver = str(TXT_File_AllText).partition("Driver=")[2].partition("\")")[0].strip()
     # chrome_options = Options()
     # chrome_options.add_extension('D:\\0 PYTHON EXE SQL CONNECTION & DRIVER PATH\\mot.gov.iq\\Browsec-VPN.crx')  # ADD EXTENSION Browsec-VPN
     # browser = webdriver.Chrome(executable_path=str(Chromedriver),
     #                            chrome_options=chrome_options)
-    browser = webdriver.Chrome(executable_path=str(Chromedriver))
+    # browser = webdriver.Chrome(executable_path=str(Chromedriver))
+    browser = webdriver.Chrome(executable_path=str(f"C:\\chromedriver.exe"))
     browser.get(
         """https://chrome.google.com/webstore/detail/browsec-vpn-free-and-unli/omghfjlpggmjjaagoclmmobgdodcjboh?hl=en" ping="/url?sa=t&amp;source=web&amp;rct=j&amp;url=https://chrome.google.com/webstore/detail/browsec-vpn-free-and-unli/omghfjlpggmjjaagoclmmobgdodcjboh%3Fhl%3Den&amp;ved=2ahUKEwivq8rjlcHmAhVtxzgGHZ-JBMgQFjAAegQIAhAB""")
     for Add_Extension in browser.find_elements_by_xpath('/html/body/div[4]/div[2]/div/div/div[2]/div[2]/div'):
@@ -144,7 +145,7 @@ def Scrap_data(browser, Tender_href):
                 for Extention_Date in browser.find_elements_by_xpath('/html/body/div/center/table/tbody/tr[7]/td/table[1]/tbody/tr/td/center/table/tbody/tr[8]/td[2]'):
                     Extention_Date = Extention_Date.get_attribute('innerText').replace('&nbsp;', '').strip()
                     # Extention_Date = Translate(Extention_Date)
-                    if Extention_Date == "Extension does not have":
+                    if Extention_Date == "تمديد":
                         Extention_Date = ""
                     else:pass
                     break
@@ -165,7 +166,7 @@ def Scrap_data(browser, Tender_href):
                 except:
                     SegFeild[24] = ""
 
-                SegFeild[18] = ":موضوع " + str(SegFeild[19]) + "<br>\n""المديرية: " + str(SegFeild[12]) + "<br>\n""تاريخ النشر: " + str(Release_Date) + "<br>\n""تاريخ التمديد: " + str(Extention_Date) + "<br>\n""تاريخ قريب: " + str(SegFeild[24])
+                SegFeild[18] = "موضوع العطاء:" + str(SegFeild[19]) + "<br>\n""اسم المديريةة: " + str(SegFeild[12]) + "<br>\n""تاريخ النشر: " + str(Release_Date) + "<br>\n""إطلاق سراحتواريخ: " + str(Extention_Date) + "<br>\n""تواريخ قريب: " + str(SegFeild[24])
 
                 SegFeild[7] = "IQ"
 
